@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import { initModels, product, order, productCreationAttributes, orderCreationAttributes} from "./models/init-models";
+import { initModels, product, order, orderdetail, productCreationAttributes, orderCreationAttributes} from "./models/init-models";
 import * as dotenv from 'dotenv';
 import { ApolloServer, gql } from "apollo-server";
 import { readFileSync } from "fs";
@@ -20,7 +20,8 @@ initModels(sequelize);
 
 const resolvers = {
     Query: {
-        products: async() => await product.findAll()
+        products: async() => await product.findAll(),
+        orders: async() => await order.findAll()
     },
     Mutation: {
         //PRODUCT
@@ -78,6 +79,7 @@ const resolvers = {
             order.destroy({ where: { id: args.id } });
             return order.findByPk(args.id);
         }
+
     }
 }
 
