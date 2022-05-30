@@ -5,7 +5,7 @@ import type { orderdetail, orderdetailId } from './orderdetail';
 export interface orderAttributes {
   id: number;
   transcode: string;
-  created: Date;
+  created: string;
 }
 
 export type orderPk = "id";
@@ -16,7 +16,7 @@ export type orderCreationAttributes = Optional<orderAttributes, orderOptionalAtt
 export class order extends Model<orderAttributes, orderCreationAttributes> implements orderAttributes {
   id!: number;
   transcode!: string;
-  created!: Date;
+  created!: string;
 
   // order hasMany orderdetail via Order_id
   orderdetails!: orderdetail[];
@@ -44,7 +44,7 @@ export class order extends Model<orderAttributes, orderCreationAttributes> imple
       allowNull: false
     },
     created: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false
     }
   }, {
